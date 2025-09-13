@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { Canvas3D } from './Canvas3D';
@@ -10,49 +10,13 @@ export function PhilosophySection() {
     offset: ["start end", "end start"]
   });
 
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
-  const textY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
-
-  const values = [
-    {
-      icon: () => (
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M12 2L12 22"/>
-          <path d="M8 6L12 10L16 6"/>
-          <path d="M8 10L12 14L16 10"/>
-          <path d="M8 14L12 18L16 14"/>
-        </svg>
-      ),
-      title: "Managed Farmland Services",
-      description: "Professional management of your agricultural investment with expert oversight from our team of agriculture and forestry graduates, ensuring optimal returns."
-    },
-    {
-      icon: () => (
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M12 2L22 7L12 12L2 7L12 2Z"/>
-          <path d="M2 17L12 22L22 17"/>
-          <path d="M2 12L12 17L22 12"/>
-        </svg>
-      ),
-      title: "Agroforestry Specialization",
-      description: "Expertise in integrating trees and shrubs with crops like sandalwood, guava, and melia dubia to create diverse, productive, and sustainable farming systems."
-    },
-    {
-      icon: () => (
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M20 21V19A4 4 0 0 0 16 15H8A4 4 0 0 0 4 19V21"/>
-          <circle cx="12" cy="7" r="4"/>
-        </svg>
-      ),
-      title: "Complete Service Portfolio",
-      description: "From farm model design and water management to organic certification and market linkage - we provide end-to-end agricultural solutions."
-    }
-  ];
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
+  const textY = useTransform(scrollYProgress, [0, 1], ['0%', '15%']);
 
   return (
-    <section id="philosophy" ref={sectionRef} className="relative min-h-screen bg-gradient-to-br from-green-50 to-yellow-50 overflow-hidden rounded-t-3xl">
-      {/* Enhanced Agricultural Canvas Background */}
-      <Canvas3D variant="organic-flow" className="opacity-10" />
+    <section id="philosophy" ref={sectionRef} className="relative min-h-screen bg-gradient-to-br from-stone-50 to-amber-50 overflow-hidden">
+      {/* Subtle Canvas Background */}
+      <Canvas3D variant="organic-flow" className="opacity-5" />
       
       {/* Parallax Background */}
       <motion.div 
@@ -62,48 +26,52 @@ export function PhilosophySection() {
         <ImageWithFallback
           src="/iot-home.jpg"
           alt="Sustainable farming practices"
-          className="w-full h-full object-cover opacity-15"
+          className="w-full h-full object-cover opacity-10"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-green-50/80 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-stone-50/90 to-transparent"></div>
       </motion.div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
-        {/* Mission Statement */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
+        {/* Section Header */}
         <motion.div 
-          className="text-center mb-16 sm:mb-20"
+          className="text-center mb-20"
           style={{ y: textY }}
         >
+          <motion.div
+            className="inline-flex items-center gap-2 bg-amber-100 border border-amber-200 rounded-full px-6 py-3 mb-8"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="w-2 h-2 bg-amber-500 rounded-full"></div>
+            <span className="font-mono text-sm text-amber-800 tracking-wider uppercase">Our Philosophy</span>
+          </motion.div>
+
           <motion.h2 
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-gray-900 mb-6 sm:mb-8"
+            className="font-serif text-4xl sm:text-5xl md:text-6xl text-slate-800 mb-8 leading-tight"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            Agroforestry <span className="text-green-600">Excellence</span>
+            Cultivating <span className="text-amber-600">Legacy</span>
           </motion.h2>
+          
           <motion.p 
-            className="text-lg sm:text-xl text-gray-600 max-w-5xl mx-auto leading-relaxed px-2"
+            className="text-xl sm:text-2xl text-slate-600 max-w-4xl mx-auto leading-relaxed font-light"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            At Darvi Group, we specialize in managed farmland solutions that combine modern agroforestry 
-            techniques with traditional agricultural wisdom. Our team of agriculture and forestry graduates 
-            provides comprehensive services from land selection to organic certification, ensuring your 
-            investment flourishes under expert management.
+            At Darvi Group, we believe that true wealth grows from the earth. Our approach combines time-honored agricultural wisdom with cutting-edge agroforestry science to create sustainable, profitable investments that benefit both investors and the environment.
           </motion.p>
         </motion.div>
 
-        {/* Agricultural Expertise Showcase */}
-        <motion.div 
-          className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center mb-16 sm:mb-20 lg:mb-24"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true }}
-        >
+        {/* Main Content Grid */}
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center mb-24">
+          {/* Portrait & Story */}
           <motion.div
             className="order-2 lg:order-1"
             initial={{ opacity: 0, x: -50 }}
@@ -111,69 +79,107 @@ export function PhilosophySection() {
             transition={{ duration: 0.8, delay: 0.3 }}
             viewport={{ once: true }}
           >
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-              <ImageWithFallback
-                src="/farm.jpg"
-                alt="Agricultural Expert"
-                className="w-full h-80 sm:h-96 object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-green-800/30 to-transparent"></div>
-              <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6">
-                <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-3 sm:p-4">
-                  <div className="text-sm text-green-600 font-medium">25+ Years Experience</div>
-                  <div className="text-base sm:text-lg font-medium text-gray-900">Agricultural Innovation</div>
+            <div className="relative">
+              <div className="absolute -inset-4 bg-gradient-to-r from-amber-200 to-amber-300 rounded-3xl opacity-20 blur-xl"></div>
+              <div className="relative bg-white rounded-3xl overflow-hidden shadow-2xl">
+                <ImageWithFallback
+                  src="/farm.jpg"
+                  alt="Darvi Group Leadership"
+                  className="w-full h-96 sm:h-[500px] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
+                <div className="absolute bottom-8 left-8 right-8">
+                  <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6">
+                    <div className="font-mono text-sm text-amber-600 uppercase tracking-wider mb-2">Founded on Expertise</div>
+                    <div className="font-serif text-2xl text-slate-800 mb-2">25+ Years of Agricultural Excellence</div>
+                    <div className="text-slate-600">Darvi Agro Developers LLP</div>
+                  </div>
                 </div>
               </div>
             </div>
           </motion.div>
 
+          {/* Philosophy Content */}
           <motion.div
-            className="space-y-4 sm:space-y-6 order-1 lg:order-2"
+            className="space-y-8 order-1 lg:order-2"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
             viewport={{ once: true }}
           >
-            <blockquote className="text-xl sm:text-2xl text-gray-700 italic leading-relaxed">
-              "Our mission is to provide investors with professionally managed farmland that delivers 
-              sustainable returns while supporting the agricultural community through modern agroforestry practices."
+            <blockquote className="text-2xl sm:text-3xl font-serif text-slate-700 italic leading-relaxed border-l-4 border-amber-400 pl-8">
+              "We don't just manage farmland; we cultivate relationships, nurture ecosystems, and grow sustainable prosperity for generations to come."
             </blockquote>
-            <div className="space-y-2">
-              <div className="text-xl sm:text-2xl font-serif text-gray-900">Darvi Agro Developers LLP</div>
-              <div className="text-base sm:text-lg text-green-600">Agricultural & Forestry Specialists</div>
-            </div>
-            <p className="text-gray-600 leading-relaxed">
-              Based in Hubli, Karnataka, our team of agriculture and forestry graduates specializes in 
-              agroforestry solutions. We focus on high-value crops like sandalwood, guava, and melia dubia, 
-              providing comprehensive services from farm model design to market linkage for sustainable agricultural investments.
-            </p>
             
-            {/* Agricultural Credentials */}
-            <div className="grid grid-cols-2 gap-3 sm:gap-4 mt-4 sm:mt-6">
-              <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-3 sm:p-4 border border-green-200">
-                <div className="text-xl sm:text-2xl font-bold text-green-600">Karnataka</div>
-                <div className="text-xs sm:text-sm text-gray-600">Prime Location</div>
+            <div className="space-y-4">
+              <div className="font-serif text-2xl text-slate-800 mb-4">Our Mission</div>
+              <p className="text-lg text-slate-600 leading-relaxed">
+                Based in the fertile landscapes of Karnataka, our team of agriculture and forestry graduates specializes in creating premium agroforestry investments. We focus on high-value crops like sandalwood, guava, and melia dubia, providing comprehensive services from farm design to market linkage.
+              </p>
+              <p className="text-lg text-slate-600 leading-relaxed">
+                Every investment with us is backed by scientific precision, sustainable practices, and a deep commitment to environmental stewardship. We believe that the best investments are those that create value for all stakeholders – investors, communities, and the planet.
+              </p>
+            </div>
+            
+            {/* Key Metrics */}
+            <div className="grid grid-cols-2 gap-6 pt-8">
+              <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-amber-200">
+                <div className="font-serif text-3xl font-bold text-amber-600 mb-2">Karnataka</div>
+                <div className="font-mono text-sm text-slate-600 uppercase tracking-wider">Prime Location</div>
               </div>
-              <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-3 sm:p-4 border border-green-200">
-                <div className="text-xl sm:text-2xl font-bold text-green-600">500+</div>
-                <div className="text-xs sm:text-sm text-gray-600">Acres Managed</div>
+              <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-amber-200">
+                <div className="font-serif text-3xl font-bold text-amber-600 mb-2">500+</div>
+                <div className="font-mono text-sm text-slate-600 uppercase tracking-wider">Acres Managed</div>
               </div>
             </div>
           </motion.div>
-        </motion.div>
+        </div>
 
-        {/* Core Agricultural Values */}
+        {/* Values Grid */}
         <motion.div 
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-16 sm:mb-20"
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-20"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          {values.map((value, index) => (
+          {[
+            {
+              icon: (
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M12 2L12 22"/>
+                  <path d="M8 6L12 10L16 6"/>
+                  <path d="M8 10L12 14L16 10"/>
+                  <path d="M8 14L12 18L16 14"/>
+                </svg>
+              ),
+              title: "Expert-Led Agroforestry",
+              description: "Our team of agriculture and forestry graduates brings decades of combined expertise to every project, ensuring optimal crop selection and management practices."
+            },
+            {
+              icon: (
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 10C21 17 12 23 12 23S3 17 3 10A9 9 0 0 1 21 10Z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              ),
+              title: "Prime Karnataka Farmland",
+              description: "Strategically located in Karnataka's most fertile regions, our farmlands benefit from ideal climate conditions and rich soil composition."
+            },
+            {
+              icon: (
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M20 21V19A4 4 0 0 0 16 15H8A4 4 0 0 0 4 19V21"/>
+                  <circle cx="12" cy="7" r="4"/>
+                </svg>
+              ),
+              title: "Turnkey Investment",
+              description: "From initial consultation to harvest and sales, we handle every aspect of your agroforestry investment, allowing you to focus on returns."
+            }
+          ].map((value, index) => (
             <motion.div
               key={value.title}
-              className="text-center p-6 sm:p-8 bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 border border-green-100"
+              className="premium-card text-center group"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
@@ -181,59 +187,65 @@ export function PhilosophySection() {
               whileHover={{ y: -8, scale: 1.02 }}
             >
               <motion.div
-                className="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-3xl flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-lg"
+                className="w-16 h-16 bg-gradient-to-br from-amber-400 to-amber-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:shadow-xl transition-shadow"
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <div className="text-white">{value.icon()}</div>
+                <div className="text-white">{value.icon}</div>
               </motion.div>
-              <h3 className="text-lg sm:text-xl font-medium text-gray-900 mb-3 sm:mb-4">{value.title}</h3>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{value.description}</p>
+              <h3 className="font-serif text-xl text-slate-800 mb-4">{value.title}</h3>
+              <p className="text-slate-600 leading-relaxed">{value.description}</p>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Agricultural Innovation Timeline */}
+        {/* Journey Timeline */}
         <motion.div 
-          className="mt-16 sm:mt-20 lg:mt-24"
+          className="mt-24"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 1 }}
           viewport={{ once: true }}
         >
-          <h3 className="text-2xl sm:text-3xl font-serif text-gray-900 text-center mb-8 sm:mb-12">Our Agroforestry Journey</h3>
+          <div className="text-center mb-16">
+            <h3 className="font-serif text-3xl sm:text-4xl text-slate-800 mb-6">Our Agroforestry Journey</h3>
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+              From humble beginnings to becoming Karnataka's trusted agroforestry investment partner
+            </p>
+          </div>
+          
           <div className="relative max-w-4xl mx-auto">
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-green-400 to-green-600 rounded-full"></div>
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-amber-400 to-amber-600 rounded-full"></div>
             
             {[
               { 
                 year: "Founded", 
                 title: "Darvi Agro Developers LLP", 
-                description: "Established as agricultural product dealers and agroforestry service providers in Hubli, Karnataka",
+                description: "Established as agricultural specialists in Hubli, Karnataka, with a vision to revolutionize agroforestry investment",
                 icon: "🌱"
               },
               { 
                 year: "Specialization", 
-                title: "High-Value Crop Focus", 
-                description: "Developed expertise in sandalwood plantations, guava, and melia dubia cultivation with managed farmland services",
+                title: "High-Value Crop Expertise", 
+                description: "Developed deep expertise in sandalwood, guava, and melia dubia cultivation with comprehensive managed farmland services",
                 icon: "🌳"
               },
               { 
-                year: "Services", 
+                year: "Innovation", 
                 title: "Comprehensive Solutions", 
-                description: "Expanded to offer farm model design, water management, organic certification, and market linkage services",
+                description: "Expanded to offer complete agroforestry solutions including farm design, water management, organic certification, and market linkage",
                 icon: "📊"
               },
               { 
-                year: "Impact", 
-                title: "Agricultural Excellence", 
-                description: "Built reputation as trusted partner for managed farmland investments with professional agricultural management",
+                year: "Excellence", 
+                title: "Industry Leadership", 
+                description: "Recognized as Karnataka's premier managed farmland investment partner with 500+ acres under expert management",
                 icon: "🏆"
               }
             ].map((milestone, index) => (
               <motion.div
                 key={milestone.year}
-                className={`relative flex items-center mb-8 sm:mb-12 ${
+                className={`relative flex items-center mb-16 ${
                   index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
                 }`}
                 initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
@@ -241,21 +253,21 @@ export function PhilosophySection() {
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 viewport={{ once: true }}
               >
-                <div className={`w-1/2 ${index % 2 === 0 ? 'pr-4 sm:pr-8 text-right' : 'pl-4 sm:pl-8 text-left'}`}>
+                <div className={`w-1/2 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left'}`}>
                   <motion.div 
-                    className="bg-white/90 backdrop-blur-sm p-4 sm:p-6 rounded-3xl shadow-lg border border-green-200"
+                    className="premium-card"
                     whileHover={{ scale: 1.02, y: -2 }}
                   >
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-xl sm:text-2xl">{milestone.icon}</span>
-                      <div className="text-green-600 font-medium text-base sm:text-lg">{milestone.year}</div>
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="text-2xl">{milestone.icon}</span>
+                      <div className="font-mono text-amber-600 font-medium text-lg uppercase tracking-wider">{milestone.year}</div>
                     </div>
-                    <h4 className="text-lg sm:text-xl font-medium text-gray-900 mt-2">{milestone.title}</h4>
-                    <p className="text-sm sm:text-base text-gray-600 mt-2">{milestone.description}</p>
+                    <h4 className="font-serif text-xl text-slate-800 mb-3">{milestone.title}</h4>
+                    <p className="text-slate-600 leading-relaxed">{milestone.description}</p>
                   </motion.div>
                 </div>
                 <motion.div 
-                  className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-br from-green-400 to-green-600 rounded-full border-4 border-white shadow-lg"
+                  className="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full border-4 border-white shadow-lg z-10"
                   whileHover={{ scale: 1.2 }}
                 />
               </motion.div>
@@ -263,32 +275,34 @@ export function PhilosophySection() {
           </div>
         </motion.div>
 
-        {/* Agricultural Impact Statistics */}
+        {/* Impact Statement */}
         <motion.div
-          className="mt-16 sm:mt-20 bg-gradient-to-r from-green-600 to-green-700 rounded-3xl p-6 sm:p-8 text-white"
+          className="mt-24 bg-gradient-to-r from-slate-800 to-slate-900 rounded-3xl p-8 sm:p-12 text-white text-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h3 className="text-xl sm:text-2xl font-serif text-center mb-6 sm:mb-8">Agroforestry Impact</h3>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 text-center">
-            <div className="p-3 sm:p-4">
-              <div className="text-2xl sm:text-3xl font-bold">500+</div>
-              <div className="text-xs sm:text-sm text-green-100">Acres Under Management</div>
-            </div>
-            <div className="p-3 sm:p-4">
-              <div className="text-2xl sm:text-3xl font-bold">Organic</div>
-              <div className="text-xs sm:text-sm text-green-100">Certification Focus</div>
-            </div>
-            <div className="p-3 sm:p-4">
-              <div className="text-2xl sm:text-3xl font-bold">Water</div>
-              <div className="text-xs sm:text-sm text-green-100">Management Systems</div>
-            </div>
-            <div className="p-3 sm:p-4">
-              <div className="text-2xl sm:text-3xl font-bold">Karnataka</div>
-              <div className="text-xs sm:text-sm text-green-100">Prime Location</div>
-            </div>
+          <h3 className="font-serif text-2xl sm:text-3xl mb-6">Our Commitment to Excellence</h3>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
+            {[
+              { value: "500+", label: "Acres Under Expert Management" },
+              { value: "Organic", label: "Certification Focus" },
+              { value: "24/7", label: "Professional Support" },
+              { value: "Karnataka", label: "Prime Agricultural Location" }
+            ].map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                className="text-center"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                viewport={{ once: true }}
+              >
+                <div className="font-serif text-2xl sm:text-3xl font-bold text-amber-400 mb-2">{stat.value}</div>
+                <div className="font-mono text-xs sm:text-sm text-white/70 uppercase tracking-wider">{stat.label}</div>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
       </div>
